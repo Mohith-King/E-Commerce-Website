@@ -6,3 +6,12 @@
   font-weight: normal;
   font-style: normal;
 }
+
+.reviews::-webkit-scrollbar {
+  display: none;
+}
+
+.reviews {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

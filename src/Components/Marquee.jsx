@@ -1,45 +1,42 @@
-const Marquee = () => {
-  return (
-    <div
-      className="bg-black
-grid
-grid-cols-3
-md:grid-cols-3
-lg:grid-cols-5
-gap-6
-items-center
-justify-items-center
-px-4
-py-8
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
-text-white"
-    >
-      <img
-        src="01.png"
-        alt="ver"
-        className="h-5 w-20 lg:h-15 lg:w-40 md:w-25 md:h-15 "
-      />
-      <img
-        src="group-logo.png"
-        alt="parada"
-        className="h-5 w-20 lg:h-15 lg:w-40 md:w-25 md:h-15 "
-      />
-      <img
-        src="gucci-logo.png"
-        alt="gucci"
-        className="h-5 w-20 lg:h-15 lg:w-40 md:w-25 md:h-15"
-      />
-      <img
-        src="vector-logo.png"
-        alt="vector"
-        className="h-5 w-20 lg:h-15 lg:w-40 md:w-25 md:h-15"
-      />
-      <img
-        src="zara-logo.png"
-        alt="zara"
-        className="h-5 w-20 lg:h-15 lg:w-40 md:w-25 md:h-15"
-      />
-    </div>
+const Marquee = () => {
+  const marqueeRef = useRef();
+
+  useGSAP(() => {
+    gsap.to(marqueeRef.current, {
+      xPercent: -50,
+      duration: 20,
+      ease: "none",
+      repeat: -1,
+    });
+  });
+
+  const logos = [
+    "01.png",
+    "group-logo.png",
+    "gucci-logo.png",
+    "vector-logo.png",
+    "zara-logo.png",
+  ];
+
+  const allLogos = [...logos, ...logos, ...logos, ...logos];
+
+  return (
+    <section className="overflow-hidden bg-black py-8">
+      <div ref={marqueeRef} className="flex w-max items-center gap-16">
+        {allLogos.map((logo, i) => (
+          <img
+            key={i}
+            src={logo}
+            alt=""
+            className="h-8 md:h-12 lg:h-14 w-auto shrink-0"
+          />
+        ))}
+      </div>
+    </section>
   );
 };
 
